@@ -1,0 +1,44 @@
+# ── Node / TypeScript ──────────────────────────────────────────────────────────
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+
+# ── pnpm ──────────────────────────────────────────────────────────────────────
+.pnpm-store/
+
+# ── Flutter ───────────────────────────────────────────────────────────────────
+**/flutter/.dart_tool/
+**/flutter/.flutter-plugins
+**/flutter/.flutter-plugins-dependencies
+**/flutter/.packages
+**/flutter/build/
+**/flutter/.pub-cache/
+**/flutter/.pub/
+**/flutter/pubspec.lock
+
+# Flutter demo
+examples/flutter-demo/.dart_tool/
+examples/flutter-demo/.flutter-plugins
+examples/flutter-demo/.flutter-plugins-dependencies
+examples/flutter-demo/build/
+examples/flutter-demo/pubspec.lock
+examples/flutter-demo/android/.gradle/
+examples/flutter-demo/android/local.properties
+examples/flutter-demo/android/app/debug.keystore
+examples/flutter-demo/ios/Pods/
+examples/flutter-demo/ios/.symlinks/
+examples/flutter-demo/ios/Flutter/Flutter.framework
+examples/flutter-demo/ios/Flutter/Flutter.podspec
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+**/.DS_Store
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml

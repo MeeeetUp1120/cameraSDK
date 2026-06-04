@@ -1,0 +1,23 @@
+name: flutter_demo
+description: Simple test app for the meeeetup_cam Flutter SDK.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Local SDK — path reference
+  meeeetup_cam:
+    path: ../../packages/flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

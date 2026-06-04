@@ -1,0 +1,36 @@
+name: meeeetup_cam
+description: Meeeetup face-capture SDK for Flutter — ML Kit face detection + passive/interactive camera modes.
+version: 0.1.0
+homepage: https://github.com/meeeetup/camera-sdk
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Camera preview + frame access
+  camera: ^0.11.0
+
+  # Face detection with keypoints (eyes + nose) — supports both Android & iOS
+  google_mlkit_face_detection: ^0.11.0
+
+  # HTTP client for API calls
+  http: ^1.2.0
+
+  # Session persistence
+  shared_preferences: ^2.3.0
+
+  # Image processing (crop, encode JPEG)
+  image: ^4.2.0
+
+  # Optional: TFLite alternative to ML Kit
+  # tflite_flutter: ^0.10.4
+  # tflite_flutter_helper: ^0.4.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0

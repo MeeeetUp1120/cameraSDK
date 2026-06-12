@@ -94,6 +94,7 @@ export function commitPending(
   track.bestJpeg = track.pendingJpeg;
   track.bestCx   = track.pendingCx;
   track.bestCy   = track.pendingCy;
+  track.lastSentAt = Date.now();
 
   if (
     track.pendingFrontalness > track.selectedFrontalness ||
@@ -101,8 +102,7 @@ export function commitPending(
   ) {
     track.selectedFrontalness = track.pendingFrontalness;
     track.selectedJpeg        = track.pendingJpeg;
-    if (track.selectedJpeg && track.pendingFrontalness >= TRACK_SELECT_MIN_FRONTALNESS) {
-      track.lastSentAt = Date.now();
+    if (track.selectedJpeg) {
       onSelect(toSelectedFace(track));
     }
   }

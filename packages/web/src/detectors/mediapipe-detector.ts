@@ -78,8 +78,8 @@ export class MediapipeDetector {
           height:  d.boundingBox!.height  / H,
         },
         keypoints: (d.keypoints ?? []).slice(0, 3).map((kp) => ({
-          x: kp.x / W,
-          y: kp.y / H,
+          x: kp.x,
+          y: kp.y,
         })),
         score: d.categories?.[0]?.score ?? 1,
       }));

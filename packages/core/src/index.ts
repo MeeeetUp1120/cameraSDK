@@ -1,4 +1,4 @@
-export type { CameraSession, Detection, FrameBuffer, SelectedFace, PersonResult, CaptureResponse } from "./types";
+export type { CameraSession, Detection, FrameBuffer, SelectedFace, LiveFacePreview, PersonResult, CaptureResponse } from "./types";
 export { getFrontalness, nmsFilter, boxIoU } from "./face-geometry";
 export {
   TRACK_MATCH_THRESHOLD,

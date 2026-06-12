@@ -3,7 +3,7 @@ import { FaceCaptureSession, type FaceCaptureSessionOptions, type SelectedFace }
 import { RNFrameBuffer } from "./frame-buffer";
 import { detectFacesMLKit } from "./detectors/mlkit-detector";
 
-export interface UseMeeeetupCameraRNOptions
+export interface UsePassiveCameraRNOptions
   extends Omit<FaceCaptureSessionOptions, "sessionType"> {
   sessionType: "interactive" | "passive";
   /**
@@ -13,7 +13,7 @@ export interface UseMeeeetupCameraRNOptions
   detectionIntervalMs?: number;
 }
 
-export interface UseMeeeetupCameraRNReturn {
+export interface UsePassiveCameraRNReturn {
   ready: boolean;
   error: string | null;
   trackedCount: number;
@@ -34,7 +34,7 @@ export interface UseMeeeetupCameraRNReturn {
  *
  * @example
  * ```tsx
- * const { onSnapshot, trackedCount } = useMeeeetupCamera({ ... });
+ * const { onSnapshot, trackedCount } = usePassiveCamera({ ... });
  *
  * <Camera
  *   ref={cameraRef}
@@ -44,9 +44,9 @@ export interface UseMeeeetupCameraRNReturn {
  * />
  * ```
  */
-export function useMeeeetupCamera(
-  opts: UseMeeeetupCameraRNOptions,
-): UseMeeeetupCameraRNReturn {
+export function usePassiveCamera(
+  opts: UsePassiveCameraRNOptions,
+): UsePassiveCameraRNReturn {
   const [ready,         setReady]         = useState(false);
   const [error,         setError]         = useState<string | null>(null);
   const [trackedCount,  setTrackedCount]  = useState(0);

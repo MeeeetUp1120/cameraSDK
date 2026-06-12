@@ -7,6 +7,6 @@ export { RNFrameBuffer }              from "./frame-buffer";
 export { loadSession, saveSession, clearSession } from "./session-store";
 export { detectFacesMLKit }           from "./detectors/mlkit-detector";
 export { TFBlazeFaceDetector }        from "./detectors/tensorflow-detector";
-export { useMeeeetupCamera }          from "./useMeeeetupCamera";
+export { usePassiveCamera }            from "./usePassiveCamera";
 export { MeeeetupCameraView }         from "./MeeeetupCameraView";
 export { ConnectScreen }              from "./ConnectScreen";

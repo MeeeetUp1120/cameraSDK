@@ -20,16 +20,21 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@meeeetup-cam/core": "workspace:*",
-    "@mediapipe/tasks-vision": "^0.10.22"
+    "@mediapipe/tasks-vision": "^0.10.22",
+    "@meeeetup-cam/core": "file:../core",
+    "lucide-react": "^1.17.0"
   },
   "peerDependencies": {
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19"
   },
   "peerDependenciesMeta": {
-    "react": { "optional": true },
-    "react-dom": { "optional": true }
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@types/react": "^19.0.0",

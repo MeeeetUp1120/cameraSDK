@@ -2,6 +2,7 @@ import { CanvasFrameBuffer } from "./frame-buffer";
 import type { MediapipeDetector } from "./detectors/mediapipe-detector";
 import type { TensorFlowDetector } from "./detectors/tensorflow-detector";
 import type { Detection } from "@meeeetup-cam/core";
+import { findPhysicalCameraId } from "./utils/camera-devices";
 
 export type SupportedDetector = MediapipeDetector | TensorFlowDetector;
 
@@ -27,10 +28,18 @@ export class CameraLoop {
     private readonly callbacks: CameraLoopCallbacks,
   ) {}
 
-  async start(deviceId?: string): Promise<void> {
-    const constraint: MediaTrackConstraints = deviceId
-      ? { deviceId: { exact: deviceId } }
-      : { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } };
+  async start(deviceId?: string, facingMode: "user" | "environment" = "user"): Promise<void> {
+    let constraint: MediaTrackConstraints;
+    if (deviceId) {
+      constraint = { deviceId: { exact: deviceId } };
+    } else {
+      // Prefer an explicit physical device ID so virtual cameras (OBS etc.) are
+      // never picked up by the facingMode ideal constraint.
+      const physicalId = await findPhysicalCameraId(facingMode);
+      constraint = physicalId
+        ? { deviceId: { exact: physicalId } }
+        : { facingMode, width: { ideal: 1280 }, height: { ideal: 720 } };
+    }
 
     this.stream = await navigator.mediaDevices.getUserMedia({ video: constraint });
     this.video.srcObject = this.stream;
@@ -70,6 +79,9 @@ export class CameraLoop {
     this.stream    = null;
     this.offscreen = null;
   }
+
+  /** Expose the offscreen canvas for overlay coordinate scaling. */
+  get offscreenCanvas(): HTMLCanvasElement | null { return this.offscreen; }
 
   private _scheduleDetect(cb: (t: DOMHighResTimeStamp) => void): void {
     if (!this.video) return;

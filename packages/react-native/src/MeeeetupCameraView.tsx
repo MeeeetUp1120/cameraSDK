@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useMeeeetupCamera, type UseMeeeetupCameraRNOptions } from "./useMeeeetupCamera";
+import { usePassiveCamera, type UsePassiveCameraRNOptions } from "./usePassiveCamera";
 import type { SelectedFace } from "@meeeetup-cam/core";
 
 // Vision Camera imports — peerDependency, typed loosely so this file compiles
@@ -10,7 +10,7 @@ type Camera = any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type CameraDevice = any;
 
-interface MeeeetupCameraViewProps extends UseMeeeetupCameraRNOptions {
+interface MeeeetupCameraViewProps extends UsePassiveCameraRNOptions {
   /** Vision Camera device object from `useCameraDevice()`. */
   device: CameraDevice;
   /** Show a live face-count badge. Default: true */
@@ -51,7 +51,7 @@ export function MeeeetupCameraView({
   const cameraRef = useRef<Camera>(null);
 
   const { ready, error, trackedCount, selectedFaces, onSnapshot } =
-    useMeeeetupCamera(hookOpts);
+    usePassiveCamera(hookOpts);
 
   if (!device) {
     return (

@@ -56,6 +56,17 @@ export interface FrameBuffer {
   ): string | null;
 }
 
+/**
+ * Live preview for a face currently being tracked — available as soon as
+ * the first crop is ready (~300ms after the face appears). Updates in real
+ * time as frontalness improves. Disappears when the track goes stale.
+ */
+export interface LiveFacePreview {
+  trackId: string;
+  dataUrl: string;     // best crop so far (pendingJpeg)
+  frontalness: number; // 0–100, smoothed
+}
+
 export interface SelectedFace {
   trackId: string;
   dataUrl: string;      // base64 JPEG data URI ready to POST

@@ -71,6 +71,7 @@ export class FaceCaptureSession {
 
   get trackedCount(): number { return this.tracks.length; }
   get pendingFaces(): SelectedFace[] { return [...this.buffer]; }
+  get activeTracks(): readonly TrackedFace[] { return this.tracks; }
 
   /**
    * Feed one frame's worth of detections into the pipeline.

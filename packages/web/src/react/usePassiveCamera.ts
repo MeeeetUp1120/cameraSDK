@@ -96,10 +96,7 @@ export function usePassiveCamera(opts: UsePassiveCameraOptions): UsePassiveCamer
             optsRef.current.onSelect?.(face);
           },
           onBatchSent: (count) => {
-            // Only remove faces that were actually sent (age ≥ 5s).
-            // Younger faces stay in the buffer for the next batch — keep them in UI too.
-            const cutoff = Date.now() - 5_000;
-            setSelectedFaces((prev) => prev.filter((f) => f.createdAt >= cutoff));
+            setSelectedFaces([]);
             optsRef.current.onBatchSent?.(count);
           },
           onSessionExpired: () => {
@@ -126,14 +123,13 @@ export function usePassiveCamera(opts: UsePassiveCameraOptions): UsePassiveCamer
             setTrackedCount(session.trackedCount);
 
             // Diff active track previews — only setState when something changed.
-            // Mirror the batch-send filter: only show faces that have been
-            // tracked for at least 5 s (same threshold used before POST).
-            const nowMs = Date.now();
+            // No age filter here — live previews show immediately.
+            // The 5s filter only applies to batch send, not display.
             const tracks = session.activeTracks;
             let changed = false;
             const snap = new Map<string, string>();
             for (const t of tracks) {
-              if (t.pendingJpeg && nowMs - t.createdAt >= 5_000) {
+              if (t.pendingJpeg) {
                 snap.set(t.id, t.pendingJpeg);
                 if (liveSnapshotRef.current.get(t.id) !== t.pendingJpeg) changed = true;
               }
@@ -143,7 +139,7 @@ export function usePassiveCamera(opts: UsePassiveCameraOptions): UsePassiveCamer
               liveSnapshotRef.current = snap;
               setLivePreviews(
                 tracks
-                  .filter((t) => t.pendingJpeg && nowMs - t.createdAt >= 5_000)
+                  .filter((t) => t.pendingJpeg)
                   .map((t) => ({
                     trackId: t.id,
                     dataUrl: t.pendingJpeg!,

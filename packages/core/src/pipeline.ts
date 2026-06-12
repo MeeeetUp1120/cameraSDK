@@ -106,9 +106,8 @@ export class FaceCaptureSession {
    * call it manually (e.g. on page hide / app background).
    */
   async flushBatch(): Promise<void> {
-    const nowMs = Date.now();
-    const faces = this.buffer.filter((f) => f.createdAt < nowMs - 5_000);
-    this.buffer = this.buffer.filter((f) => f.createdAt >= nowMs - 5_000);
+    const faces = [...this.buffer];
+    this.buffer = [];
     if (faces.length === 0) return;
     try {
       await this.api.capture(faces.map((f) => ({ dataUrl: f.dataUrl, capturedAt: f.createdAt })));

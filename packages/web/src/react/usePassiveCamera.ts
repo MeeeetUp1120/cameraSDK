@@ -113,6 +113,10 @@ export function usePassiveCamera(opts: UsePassiveCameraOptions): UsePassiveCamer
           onTrackRemoved: (id) => {
             optsRef.current.onTrackRemoved?.(id);
           },
+          onBatchError: (err) => {
+            console.error("[usePassiveCamera] batch send failed:", err);
+            optsRef.current.onBatchError?.(err);
+          },
         });
         sessionRef.current = session;
 

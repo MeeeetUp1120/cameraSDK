@@ -46,7 +46,7 @@ export function MeeeetUpCam({
   const handleCapture = useCallback(async (dataUrl: string) => {
     if (!dataUrl) return;
     try {
-      const { persons } = await client.capture([dataUrl]);
+      const { persons } = await client.capture([{ dataUrl, capturedAt: Date.now() }]);
       onResult?.(persons);
     } catch (err: unknown) {
       const status = (err as { status?: number })?.status;

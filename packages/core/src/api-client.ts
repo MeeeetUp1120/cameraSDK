@@ -23,17 +23,19 @@ export class ApiClient {
     return sessionFromToken(token);
   }
 
-  /** Send a batch of face images. Returns matched persons. */
-  async capture(images: string[]): Promise<CaptureResponse> {
+  /** Send a batch of face images with capture timestamps. */
+  async capture(faces: { dataUrl: string; capturedAt: number }[]): Promise<CaptureResponse> {
     const res = await fetch(`${this.baseUrl}/camera/capture`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${this.token}`,
       },
-      body: JSON.stringify({ images }),
+      body: JSON.stringify({
+        images: faces.map((f) => ({ dataUrl: f.dataUrl, capturedAt: f.capturedAt })),
+      }),
     });
-    if (!res.ok) throw new Error(`Capture failed: ${res.status}`);
+    if (!res.ok) throw Object.assign(new Error(`Capture failed: ${res.status}`), { status: res.status });
     return res.json() as Promise<CaptureResponse>;
   }
 

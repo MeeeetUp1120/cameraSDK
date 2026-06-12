@@ -24,6 +24,8 @@ export interface FaceCaptureSessionOptions {
   onTrackRemoved?: (trackId: string) => void;
   /** Called after each successful batch send. */
   onBatchSent?: (count: number) => void;
+  /** Called when a batch send fails (API error, network down, etc.). */
+  onBatchError?: (error: unknown) => void;
   /** Called when /camera/me returns 401. */
   onSessionExpired?: () => void;
   /** Called when /camera/me returns 404. */
@@ -52,6 +54,7 @@ export class FaceCaptureSession {
       onSelect:           opts.onSelect           ?? (() => {}),
       onTrackRemoved:     opts.onTrackRemoved      ?? (() => {}),
       onBatchSent:        opts.onBatchSent         ?? (() => {}),
+      onBatchError:       opts.onBatchError        ?? (() => {}),
       onSessionExpired:   opts.onSessionExpired    ?? (() => {}),
       onCameraNotFound:   opts.onCameraNotFound    ?? (() => {}),
       ...opts,
@@ -108,11 +111,12 @@ export class FaceCaptureSession {
     this.buffer = this.buffer.filter((f) => f.createdAt >= nowMs - 5_000);
     if (faces.length === 0) return;
     try {
-      await this.api.capture(faces.map((f) => f.dataUrl));
+      await this.api.capture(faces.map((f) => ({ dataUrl: f.dataUrl, capturedAt: f.createdAt })));
       this.opts.onBatchSent(faces.length);
-    } catch {
+    } catch (err) {
       // Put them back on failure so we don't lose data
       this.buffer.unshift(...faces);
+      this.opts.onBatchError(err);
     }
   }
 

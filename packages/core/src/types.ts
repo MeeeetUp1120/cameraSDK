@@ -61,6 +61,7 @@ export interface SelectedFace {
   dataUrl: string;      // base64 JPEG data URI ready to POST
   frontalness: number;  // 0–100
   lastSentAt: number;   // Unix ms
+  createdAt: number;    // Unix ms
 }
 
 export interface PersonResult {

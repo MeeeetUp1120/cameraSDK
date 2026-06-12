@@ -83,15 +83,16 @@ class FaceCaptureSession {
 
   /// Send all buffered faces to the API and clear the buffer.
   Future<void> flushBatch() async {
-    final faces = List<SelectedFace>.from(_buffer);
-    _buffer.clear();
-    if (faces.isEmpty) return;
+    final nowMs = DateTime.now().millisecondsSinceEpoch;
+    final toSend = _buffer.where((f) => f.createdAt.millisecondsSinceEpoch < nowMs - 5000).toList();
+    _buffer.removeWhere((f) => f.createdAt.millisecondsSinceEpoch < nowMs - 5000);
+    if (toSend.isEmpty) return;
     try {
-      await _api.capture(faces.map((f) => f.dataUrl).toList());
-      onBatchSent?.call(faces.length);
+      await _api.capture(toSend.map((f) => f.dataUrl).toList());
+      onBatchSent?.call(toSend.length);
     } catch (_) {
       // Put back on failure
-      _buffer.insertAll(0, faces);
+      _buffer.insertAll(0, toSend);
     }
   }
 

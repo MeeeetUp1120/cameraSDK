@@ -10,6 +10,7 @@ const int    boxDisplayMs            = 150;
 const double trackSelectMinFrontalness  = 40;
 const double pendingConfirmThreshold    = 50;
 const int    minPendingConfirmedFrames  = 3;
+const int    trackCooldownMs           = 10000; // resend interval per track
 
 // ── TrackedFace ────────────────────────────────────────────────────────────────
 class TrackedFace {
@@ -85,6 +86,7 @@ SelectedFace _toSelectedFace(TrackedFace t) => SelectedFace(
   dataUrl:    t.selectedJpeg!,
   frontalness: t.selectedFrontalness,
   lastSentAt: DateTime.fromMillisecondsSinceEpoch(t.lastSentAt),
+  createdAt:  DateTime.fromMillisecondsSinceEpoch(t.createdAt),
 );
 
 void _resetPending(TrackedFace track) {
@@ -92,6 +94,7 @@ void _resetPending(TrackedFace track) {
   track.pendingJpeg            = null;
   track.pendingStaleFrames     = 0;
   track.pendingConfirmedFrames = 0;
+  track.smoothedFrontalness    = 0;
 }
 
 void commitPending(
@@ -114,6 +117,7 @@ void commitPending(
       onSelect(_toSelectedFace(track));
     }
   }
+  track.lastSentAt = DateTime.now().millisecondsSinceEpoch;
   _resetPending(track);
 }
 
@@ -186,7 +190,10 @@ void updateTracks(
         track.pendingStaleFrames = 0;
       } else {
         track.pendingStaleFrames++;
-        if (track.pendingStaleFrames >= 2 && track.pendingJpeg != null) {
+        final cooldownOk = nowMs - track.lastSentAt >= trackCooldownMs;
+        final qualityOk  = track.pendingConfirmedFrames >= minPendingConfirmedFrames;
+        if (track.pendingStaleFrames >= 10 && track.pendingJpeg != null &&
+            cooldownOk && qualityOk) {
           onCommit(track);
         }
       }
@@ -195,8 +202,11 @@ void updateTracks(
 
   for (final track in available) {
     track.pendingStaleFrames++;
-    if (track.pendingStaleFrames >= 2 &&
-        track.pendingFrontalness > track.bestFrontalness) {
+    final cooldownOk = nowMs - track.lastSentAt >= trackCooldownMs;
+    final qualityOk  = track.pendingConfirmedFrames >= minPendingConfirmedFrames;
+    if (track.pendingStaleFrames >= 10 &&
+        track.pendingFrontalness > track.bestFrontalness &&
+        cooldownOk && qualityOk) {
       onCommit(track);
     }
   }

@@ -9,6 +9,7 @@ export const BOX_DISPLAY_MS               = 150;   // hide overlay box after las
 export const TRACK_SELECT_MIN_FRONTALNESS = 40;    // min frontalness to fire onSelect
 export const PENDING_CONFIRM_THRESHOLD    = 50;    // min frontalness to count a confirmed frame
 export const MIN_PENDING_CONFIRMED_FRAMES = 3;     // reject single-frame MediaPipe spikes
+export const TRACK_COOLDOWN_MS             = 10_000; // min ms between sends for the same track
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 export interface TrackedFace {
@@ -65,6 +66,7 @@ function toSelectedFace(t: TrackedFace): SelectedFace {
     dataUrl: t.selectedJpeg!,
     frontalness: t.selectedFrontalness,
     lastSentAt: t.lastSentAt,
+    createdAt: t.createdAt,
   };
 }
 
@@ -73,6 +75,7 @@ function resetPending(track: TrackedFace): void {
   track.pendingJpeg = null;
   track.pendingStaleFrames = 0;
   track.pendingConfirmedFrames = 0;
+  track.smoothedFrontalness = 0;
 }
 
 // ── Commit pipeline ────────────────────────────────────────────────────────────
@@ -99,6 +102,7 @@ export function commitPending(
     track.selectedFrontalness = track.pendingFrontalness;
     track.selectedJpeg        = track.pendingJpeg;
     if (track.selectedJpeg && track.pendingFrontalness >= TRACK_SELECT_MIN_FRONTALNESS) {
+      track.lastSentAt = Date.now();
       onSelect(toSelectedFace(track));
     }
   }
@@ -174,7 +178,9 @@ export function updateTracks(
         track.pendingStaleFrames = 0;
       } else {
         track.pendingStaleFrames++;
-        if (track.pendingStaleFrames >= 2 && track.pendingJpeg !== null) {
+        const cooldownOk = nowMs - track.lastSentAt >= TRACK_COOLDOWN_MS;
+        const qualityOk  = track.pendingConfirmedFrames >= MIN_PENDING_CONFIRMED_FRAMES;
+        if (track.pendingStaleFrames >= 10 && track.pendingJpeg !== null && cooldownOk && qualityOk) {
           onCommit(track);
         }
       }
@@ -184,9 +190,12 @@ export function updateTracks(
   // Advance stale countdown for unmatched tracks
   for (const track of available) {
     track.pendingStaleFrames++;
+    const cooldownOk = nowMs - track.lastSentAt >= TRACK_COOLDOWN_MS;
+    const qualityOk  = track.pendingConfirmedFrames >= MIN_PENDING_CONFIRMED_FRAMES;
     if (
-      track.pendingStaleFrames >= 2 &&
-      track.pendingFrontalness > track.bestFrontalness
+      track.pendingStaleFrames >= 10 &&
+      track.pendingFrontalness > track.bestFrontalness &&
+      cooldownOk && qualityOk
     ) {
       onCommit(track);
     }

@@ -74,6 +74,7 @@ class SelectedFace {
     required this.dataUrl,
     required this.frontalness,
     required this.lastSentAt,
+    required this.createdAt,
   });
 
   final String trackId;
@@ -85,6 +86,8 @@ class SelectedFace {
   final double frontalness;
 
   final DateTime lastSentAt;
+
+  final DateTime createdAt;
 }
 
 class PersonResult {

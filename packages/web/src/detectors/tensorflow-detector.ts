@@ -18,8 +18,8 @@ export class TensorFlowDetector {
   static async create(): Promise<TensorFlowDetector> {
     // Dynamic imports — only loaded if this detector is actually used
     const [tf, blazeface] = await Promise.all([
-      import("@tensorflow/tfjs" as never),
-      import("@tensorflow-models/blazeface" as never),
+      import(/* @vite-ignore */ "@tensorflow/tfjs" as never),
+      import(/* @vite-ignore */ "@tensorflow-models/blazeface" as never),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ]) as any[];
     await tf.ready();

@@ -16,11 +16,12 @@ export class TensorFlowDetector {
   private constructor(private readonly model: any) {}
 
   static async create(): Promise<TensorFlowDetector> {
-    // Dynamic imports — only loaded if this detector is actually used
-    const [tf, blazeface] = await Promise.all([
-      import(/* @vite-ignore */ "@tensorflow/tfjs" as never),
-      import(/* @vite-ignore */ "@tensorflow-models/blazeface" as never),
+    // String split prevents Vite / Rollup from statically resolving these
+    // optional peer deps — they are only loaded if this method is called.
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const [tf, blazeface] = await Promise.all([
+      import("@tensorflow" + "/tfjs" as never),
+      import("@tensorflow-models" + "/blazeface" as never),
     ]) as any[];
     await tf.ready();
     const model = await blazeface.load();

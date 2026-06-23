@@ -24,7 +24,11 @@ jobs:
           scope: "@meeeetup-cam"
 
       - run: pnpm install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish @meeeetup-cam/core
         run: pnpm publish --no-git-checks --access restricted

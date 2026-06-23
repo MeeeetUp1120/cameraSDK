@@ -58,7 +58,7 @@ importers:
         specifier: ^0.10.22
         version: 0.10.35
       '@meeeetup-cam/core':
-        specifier: file:../core
+        specifier: workspace:*
         version: link:../core
       lucide-react:
         specifier: ^1.17.0

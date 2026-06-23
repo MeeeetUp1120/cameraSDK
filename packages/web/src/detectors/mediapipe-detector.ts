@@ -1,4 +1,4 @@
-import type { Detection } from "@meeeetup-cam/core";
+import type { Detection } from "@meeeetup1120/core";
 
 // Lazily imported so the WASM is only fetched when the detector is created.
 type FaceDetector = {

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { usePassiveCamera, type UsePassiveCameraRNOptions } from "./usePassiveCamera";
-import type { SelectedFace } from "@meeeetup-cam/core";
+import type { SelectedFace } from "@meeeetup1120/core";
 
 // Vision Camera imports — peerDependency, typed loosely so this file compiles
 // without it being installed in the SDK workspace itself.

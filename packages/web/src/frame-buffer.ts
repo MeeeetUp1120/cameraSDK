@@ -1,4 +1,4 @@
-import type { FrameBuffer } from "@meeeetup-cam/core";
+import type { FrameBuffer } from "@meeeetup1120/core";
 
 /**
  * Web implementation of FrameBuffer backed by an HTMLCanvasElement.

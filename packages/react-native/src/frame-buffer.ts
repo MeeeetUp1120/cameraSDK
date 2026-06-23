@@ -1,4 +1,4 @@
-import type { FrameBuffer } from "@meeeetup-cam/core";
+import type { FrameBuffer } from "@meeeetup1120/core";
 
 /**
  * React Native FrameBuffer backed by a base64 JPEG string already captured

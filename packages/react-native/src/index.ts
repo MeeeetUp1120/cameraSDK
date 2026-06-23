@@ -1,6 +1,6 @@
 // Core re-exports
-export type { CameraSession, Detection, FrameBuffer, SelectedFace } from "@meeeetup-cam/core";
-export { FaceCaptureSession, ApiClient, isTokenExpired, sessionFromToken } from "@meeeetup-cam/core";
+export type { CameraSession, Detection, FrameBuffer, SelectedFace } from "@meeeetup1120/core";
+export { FaceCaptureSession, ApiClient, isTokenExpired, sessionFromToken } from "@meeeetup1120/core";
 
 // React Native specific
 export { RNFrameBuffer }              from "./frame-buffer";

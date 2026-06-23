@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { FaceCaptureSession, type FaceCaptureSessionOptions, type SelectedFace, type TrackedFace, type LiveFacePreview } from "@meeeetup-cam/core";
+import { FaceCaptureSession, type FaceCaptureSessionOptions, type SelectedFace, type TrackedFace, type LiveFacePreview } from "@meeeetup1120/core";
 import { MediapipeDetector } from "../detectors/mediapipe-detector";
 import { CameraLoop } from "../camera-loop";
 import { drawOverlay } from "../overlay";

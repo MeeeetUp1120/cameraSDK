@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { FaceCaptureSession, type FaceCaptureSessionOptions, type SelectedFace } from "@meeeetup-cam/core";
+import { FaceCaptureSession, type FaceCaptureSessionOptions, type SelectedFace } from "@meeeetup1120/core";
 import { RNFrameBuffer } from "./frame-buffer";
 import { detectFacesMLKit } from "./detectors/mlkit-detector";
 

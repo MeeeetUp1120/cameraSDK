@@ -1,4 +1,4 @@
-import type { Detection } from "@meeeetup-cam/core";
+import type { Detection } from "@meeeetup1120/core";
 
 /**
  * ML Kit face detection adapter for React Native.

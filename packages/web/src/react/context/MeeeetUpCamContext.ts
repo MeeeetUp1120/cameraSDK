@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import type { SelectedFace, LiveFacePreview, PersonResult } from "@meeeetup-cam/core";
+import type { SelectedFace, LiveFacePreview, PersonResult } from "@meeeetup1120/core";
 
 export type CameraMode = "passive" | "interactive";
 

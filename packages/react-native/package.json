@@ -1,5 +1,5 @@
 {
-  "name": "@meeeetup-cam/react-native",
+  "name": "@meeeetup1120/react-native",
   "version": "0.1.0",
   "description": "React Native SDK for meeeetup-cam — Vision Camera + ML Kit face detection",
   "type": "module",
@@ -25,7 +25,7 @@
     "directory": "packages/react-native"
   },
   "dependencies": {
-    "@meeeetup-cam/core": "workspace:*"
+    "@meeeetup1120/core": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18 || ^19",

@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 24
           registry-url: https://npm.pkg.github.com
-          scope: "@meeeetup-cam"
+          scope: "@meeeetup1120"
 
       - run: pnpm install --frozen-lockfile
         env:
@@ -30,19 +30,19 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish @meeeetup-cam/core
+      - name: Publish @meeeetup1120/core
         run: pnpm publish --no-git-checks --access restricted
         working-directory: packages/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish @meeeetup-cam/web
+      - name: Publish @meeeetup1120/web
         run: pnpm publish --no-git-checks --access restricted
         working-directory: packages/web
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish @meeeetup-cam/react-native
+      - name: Publish @meeeetup1120/react-native
         run: pnpm publish --no-git-checks --access restricted
         working-directory: packages/react-native
         env:

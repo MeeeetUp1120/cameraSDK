@@ -1,5 +1,5 @@
 {
-  "name": "@meeeetup-cam/web",
+  "name": "@meeeetup1120/web",
   "version": "0.1.0",
   "description": "Web SDK for meeeetup-cam — MediaPipe BlazeFace + React hooks",
   "type": "module",
@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "^0.10.22",
-    "@meeeetup-cam/core": "workspace:*",
+    "@meeeetup1120/core": "workspace:*",
     "lucide-react": "^1.17.0"
   },
   "peerDependencies": {

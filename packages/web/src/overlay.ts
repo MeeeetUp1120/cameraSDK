@@ -1,5 +1,5 @@
-import type { TrackedFace } from "@meeeetup-cam/core";
-import { BOX_DISPLAY_MS } from "@meeeetup-cam/core";
+import type { TrackedFace } from "@meeeetup1120/core";
+import { BOX_DISPLAY_MS } from "@meeeetup1120/core";
 
 /**
  * Draw bounding boxes and frontalness labels over an overlay canvas.

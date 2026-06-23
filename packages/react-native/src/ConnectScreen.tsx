@@ -3,7 +3,7 @@ import {
   View, Text, TextInput, TouchableOpacity, ActivityIndicator,
   StyleSheet, KeyboardAvoidingView, Platform,
 } from "react-native";
-import { ApiClient, type CameraSession } from "@meeeetup-cam/core";
+import { ApiClient, type CameraSession } from "@meeeetup1120/core";
 import { saveSession } from "./session-store";
 
 interface ConnectScreenProps {

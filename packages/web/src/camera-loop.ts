@@ -1,7 +1,7 @@
 import { CanvasFrameBuffer } from "./frame-buffer";
 import type { MediapipeDetector } from "./detectors/mediapipe-detector";
 import type { TensorFlowDetector } from "./detectors/tensorflow-detector";
-import type { Detection } from "@meeeetup-cam/core";
+import type { Detection } from "@meeeetup1120/core";
 import { findPhysicalCameraId } from "./utils/camera-devices";
 
 export type SupportedDetector = MediapipeDetector | TensorFlowDetector;

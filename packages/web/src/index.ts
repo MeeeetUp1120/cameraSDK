@@ -1,6 +1,6 @@
 // Types
-export type { SelectedFace, LiveFacePreview, PersonResult } from "@meeeetup-cam/core";
-export { ApiClient, isTokenExpired, sessionFromToken } from "@meeeetup-cam/core";
+export type { SelectedFace, LiveFacePreview, PersonResult } from "@meeeetup1120/core";
+export { ApiClient, isTokenExpired, sessionFromToken } from "@meeeetup1120/core";
 
 // ── Context API (primary) ───────────────────────────────────────────────────────
 export { MeeeetUpCamProvider }    from "./react/context/MeeeetUpCamProvider";

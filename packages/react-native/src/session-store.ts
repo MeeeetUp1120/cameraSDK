@@ -2,8 +2,8 @@
  * AsyncStorage-backed session persistence for React Native.
  * Mirrors the web SDK's localStorage session helpers.
  */
-import { isTokenExpired, sessionFromToken } from "@meeeetup-cam/core";
-import type { CameraSession } from "@meeeetup-cam/core";
+import { isTokenExpired, sessionFromToken } from "@meeeetup1120/core";
+import type { CameraSession } from "@meeeetup1120/core";
 
 const KEY = "@meeeetup_cam/session";
 

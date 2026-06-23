@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
-import { sessionFromToken, ApiClient } from "@meeeetup-cam/core";
-import type { PersonResult } from "@meeeetup-cam/core";
+import { sessionFromToken, ApiClient } from "@meeeetup1120/core";
+import type { PersonResult } from "@meeeetup1120/core";
 import { usePassiveCamera } from "../usePassiveCamera";
 import { useInteractiveCamera } from "../useInteractiveCamera";
 import { useCameraDevices } from "../useCameraDevices";

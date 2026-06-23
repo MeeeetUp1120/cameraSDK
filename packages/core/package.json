@@ -1,5 +1,5 @@
 {
-  "name": "@meeeetup-cam/core",
+  "name": "@meeeetup1120/core",
   "version": "0.1.0",
   "description": "Platform-agnostic core for the meeeetup-cam face-capture SDK",
   "type": "module",

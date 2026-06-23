@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ApiClient, sessionFromToken, type CameraSession } from "@meeeetup-cam/core";
+import { ApiClient, sessionFromToken, type CameraSession } from "@meeeetup1120/core";
 
 /**
  * Hook to connect a camera client via OTP.

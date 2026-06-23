@@ -96,7 +96,8 @@ export function usePassiveCamera(opts: UsePassiveCameraOptions): UsePassiveCamer
             optsRef.current.onSelect?.(face);
           },
           onBatchSent: (count) => {
-            setSelectedFaces([]);
+            const cutoff = Date.now() - 5_000;
+            setSelectedFaces((prev) => prev.filter((f) => f.createdAt >= cutoff));
             optsRef.current.onBatchSent?.(count);
           },
           onSessionExpired: () => {

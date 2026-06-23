@@ -9,10 +9,10 @@ const KEY = "@meeeetup_cam/session";
 
 // Lazily require AsyncStorage so the package builds without it being installed
 // (it's a peerDependency)
-function storage() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function storage(): any {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  return require("@react-native-async-storage/async-storage")
-    .default as import("@react-native-async-storage/async-storage").default;
+  return require("@react-native-async-storage/async-storage").default;
 }
 
 export async function loadSession(): Promise<CameraSession | null> {

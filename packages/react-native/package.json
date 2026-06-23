@@ -2,10 +2,27 @@
   "name": "@meeeetup-cam/react-native",
   "version": "0.1.0",
   "description": "React Native SDK for meeeetup-cam — Vision Camera + ML Kit face detection",
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MeeeetUp1120/cameraSDK.git",
+    "directory": "packages/react-native"
   },
   "dependencies": {
     "@meeeetup-cam/core": "workspace:*"

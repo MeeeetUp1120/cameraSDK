@@ -1,0 +1,47 @@
+name: Publish Packages
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://npm.pkg.github.com
+          scope: "@meeeetup-cam"
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      - name: Publish @meeeetup-cam/core
+        run: pnpm publish --no-git-checks --access restricted
+        working-directory: packages/core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish @meeeetup-cam/web
+        run: pnpm publish --no-git-checks --access restricted
+        working-directory: packages/web
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish @meeeetup-cam/react-native
+        run: pnpm publish --no-git-checks --access restricted
+        working-directory: packages/react-native
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

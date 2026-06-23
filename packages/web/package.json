@@ -15,6 +15,15 @@
       "types": "./dist/react/index.d.ts"
     }
   },
+  "files": ["dist"],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MeeeetUp1120/cameraSDK.git",
+    "directory": "packages/web"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsc -p tsconfig.json --watch",
